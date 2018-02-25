@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Hangman Game</title>
+    <!-- <link rel="stylesheet" href="hangman.css">
+    <link rel="stylesheet" href="nice80sHeader.css"> -->
+
+  </head>
+  <body>
+
+    <div id="currentWord">
+        <!-- ultimately, we want a line for each letter of the current Word to show up in the browser -->
+    </div>
+
+
+    <script>
+    
+        var hangmanWords = ["cat", "dog", "mouse"]
+
+        // if we want to have the browser print all 3 strings as 1 string do this (lines 22 & 23):
+        var words = hangmanWords.join(" ");
+        console.log(words);
+
+
+        //lines 25-28: make a new p tag, create some content, add that content to the p tag, and then append the p tag to our currentWord div on line 12
+        var alpha = document.createElement("p");
+        var textnode = document.createTextNode("letter");
+        alpha.appendChild(textnode);
+        document.getElementById("currentWord").appendChild(alpha);
+
+//replaces each letter of the word with an underscore
+            
+        for (var k = 0; k < words.length; k++) {
+            var ll = document.createElement("span");
+            var bb = " _";
+            if (words.charAt(k) === " "){
+                bb = '\xa0';
+                // nonlttr++;
+            }
+            ll.innerText = bb;
+            alpha.appendChild(ll);
+            
+        }
+  
+
+    //access each of the words in our array called "hangmanWords" 
+for(var i = 0; i < hangmanWords.length; i++){
+
+        //access each letter in each word
+        for(var j = 0; j < hangmanWords[i].length; j++){
+            letter = hangmanWords[i][j]
+      
+        //copied and pasted lines 25-28.
+        var alpha = document.createElement("p");
+        var textnode = document.createTextNode(letter);
+        alpha.appendChild(textnode);
+        document.getElementById("currentWord").appendChild(alpha);
+       
+        //function made up to try to change each letter in var letter into a blank space respresented by a "_".
+        function cray(){var ll = document.getElementsByTagName("p").innerHTML; 
+        var bb = ll.replace(letter, " _");
+        document.getElementsByTagName("p").innerHTML= bb;
+
+   }      
+
+  } 
+  }
+
+//Computer listens for a user letter key press
+document.onkeyup = function() {
+    var userG = String.fromCharCode(event.keyCode).
+        toLowerCase();
+
+    console.log(userG);
+    
+}
+
+//Computer chooses random word from the array hangmanWords
+var wordClue = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
+console.log(wordClue);
+
+//Take the computer choosen word (wordClue) and print the desired underscores.
+
+           
+/* TONY'S SOLUTION: Fill the space equivalent to the length of the word with underscores.
+   for (i = 0; i < word.length; i++) {
+
+var ltrpos = document.createElement("li");
+var somstri = "_";
+if (word.charAt(i) === " ") {
+    somstri = '\xa0';
+    nonlttr++;
+}
+ltrpos.innerText = somstri;
+guessspace.appendChild(ltrpos);
+
+} */
+ 
+      
+    </script>
+    </body>
+
+</html>
